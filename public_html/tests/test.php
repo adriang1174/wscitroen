@@ -5,40 +5,21 @@ $f3=require('../lib/base.php'); // path to f3
 
 // Set up
 $test=new Test;
-include('../app/barcel.php');
 include('../app/controller.php');
-$b = new Barcel;
+include('../app/service.php');
 
-// This is where the tests begin
-$test->expect(
-    is_callable('is_used'),
-    'is_used() is a method'
-);
 
-// Another test
-$res=is_used('12345678');
-$test->expect(
-    !res,
-    'Code 12345678 is not used'
-);
-
-// This test should succeed
-$res=is_used('20000012');
-$test->expect(
-    !res,
-    'Code 20000012 is used'
-);
-/*20000012
-$test->expect(
-    is_string($hello),
-    'Return value is a string'
-);
-*/
-// This test is bound to fail
+//$f3->mock('GET /form');
+$f3->set('QUIET',TRUE); 
+$f3->mock('POST http://node2.beta.codenvy.com:40496/project-0igw/public_html/form', array('email'=>'adriang_1174@hotmail.com','edad'=>'42','sexo'=>'M','op1'=>'Y','op2'=>'Y','conoce'=>'Y','donde'=>'web'));
+//$res = $f3->('PARAMS["email"]');
 //$test->expect(
-//   strlen($hello)==13,
-//    'String length is 13'
+  //  $_POST === array('email'=>'adriang_1174@hotmail.com','edad'=>'42','sexo'=>'M','op1'=>'Y','op2'=>'Y','conoce'=>'Y','donde'=>'web'),
+  //  'POST OK'
 //);
+//$f3->set('QUIET',FALSE); // allow test results to be shown later
+//$f3->clear('ERROR');  // clear any errors
+
 
 // Display the results; not MVC but let's keep it simple
 foreach ($test->results() as $result) {
